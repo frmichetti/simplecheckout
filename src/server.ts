@@ -12,7 +12,7 @@ server.get("/", (request, response) => {
     return response.send("Hello!");
 });
 
-server.get("/pay", async (request,response) => {
+server.post("/pay", async (request, response) => {
 
     const params = {
         "items": [
@@ -52,7 +52,12 @@ server.get("/pay", async (request,response) => {
         ]
     };
 
-    let axiosResponse = await payments.creditCard(params);
+    let axiosResponse = {data: {}};
+    try {
+        axiosResponse = await payments.creditCard(params);
+    } catch (e) {
+        console.log(e);
+    }
 
 
     return response.json(axiosResponse.data);
