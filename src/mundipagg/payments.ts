@@ -12,7 +12,8 @@ const creditCard = (params: { items: { amount: number; description: string; quan
     });
 
     // Alter defaults after instance has been created
-    instance.defaults.headers.common['Authorization'] = 'Basic ' + new Buffer("sk_test_9KvJyM8SXtJ4GlV2:").toString('base64');
+    // @ts-ignore
+    instance.defaults.headers.common['Authorization'] = 'Basic ' + new Buffer(process.env.MP_KEY).toString('base64');
     instance.defaults.headers.common['Content-Type'] = 'application/json';
 
 

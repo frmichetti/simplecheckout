@@ -1,9 +1,8 @@
+require('dotenv').config();
+
 import express from "express";
 import bodyParser from "body-parser";
 import payments from "./mundipagg/payments";
-
-
-require('dotenv').config();
 
 const server = express();
 
