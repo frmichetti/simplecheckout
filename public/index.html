@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="app">
+<head>
+  <meta charset="UTF-8">
+  <title>CodePen - Credit Card Checkout | Daily UI #002</title>
+  <link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.5/css/materialize.min.css'>
+  <link rel='stylesheet' href='https://fonts.googleapis.com/icon?family=Material+Icons'><link rel="stylesheet" href="./style.css">
+
+</head>
+<body>
+<!-- partial:index.partial.html -->
+<!-- Compiled and minified JavaScript -->
+<script type="text/javascript" src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.5/js/materialize.min.js"></script>
+<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/angularjs/1.8.2/angular.min.js"></script>
+
+<script type="text/javascript" src="app.js"></script>
+
+<!--Begin Checkout-->
+
+<div class="container" ng-controller="AppController as controller">
+  <p class="help" style="color:#ffffff;">
+    Please review your bill and pay </p>
+<!-- <form method="post" action="http://localhost:8000/pay">-->
+    <div class="box card-panel z-depth-3">
+    <div class="merchant">
+      <img id="crickets" src="./cricketsCafe.png" />
+      <h5 class="center-align">Crickets Café</h5>
+      <p>Feb 10, 2016 9:36 PM</p>
+    </div>
+    <div class="invoice">
+      <table class="highlight">
+        <thead>
+          <tr>
+            <th>QTY</th>
+            <th>ITEM</th>
+            <th class="right-align">PRICE</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr ng-repeat="item in controller.items">
+            <td>{{item.qty}}</td>
+            <td>{{item.description}}</td>
+            <td class="right-align">R$ {{item.price}}</td>
+          </tr>
+
+          <tr>
+            <td></td>
+            <td class="right-align">Tax</td>
+            <td class="right-align">R$ {{controller.tax}}</td>
+          </tr>
+          <tr>
+            <td></td>
+            <td class="right-align bold">Total</td>
+            <td class="right-align bold">R$ {{controller.total}}</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="payment">
+      <h5>Payment Information</h5>
+      <div class="credit-card-box card-panel z-depth-2 animation-element slide-left">
+        <div class="flip">
+          <div class="front">
+            <div class="logo">
+              <img src="http://cdn.flaticon.com/svg/39/39134.svg" alt="" />
+            </div>
+
+            <div class="number input-field">
+              <label for="card-number-1">Card Number</label>
+              <input type="text" id="card-number-1" class="input-card-number" maxlength="4" ng-model="controller.number1"/>
+              <input type="text" id="card-number-2" class="input-card-number" maxlength="4" ng-model="controller.number2"/>
+              <input type="text" id="card-number-3" class="input-card-number" maxlength="4" ng-model="controller.number3"/>
+              <input type="text" id="card-number-4" class="input-card-number" maxlength="4" ng-model="controller.number4"/>
+            </div>
+            <div class="cvv input-field">
+              <label for="card-cvv">CVV</label>
+              <input type="text" id="card-cvv" class="input-card-cvv" maxlength="3" ng-model="controller.cvv"/>
+            </div>
+            <div class="card-holder input-field">
+              <label for="name">Card Holder</label>
+              <input type="text" name="name" id="name" ng-model="controller.holderName">
+            </div>
+
+            <div class="card-expiration-date input-field">
+              <select id="month" ng-model="controller.selectedMonth" ng-options="month for month in controller.months" ></select>
+              <select id="year" ng-model="controller.selectedYear" ng-options="year for year in controller.years"></select>
+              <label>Expires</label>
+            </div>
+
+          </div>
+
+        </div>
+      </div>
+
+    </div>
+
+    <div class="button checkout row">
+      <button class="col s12 btn-large green btn waves-effect waves-dark register" ng-click="controller.payNow()"><span>Checkout</span> <i class="fa fa-check"></i></button>
+    </div>
+
+  </div>
+<!-- </form>-->
+</div>
+
+<script>
+  $(document).ready(function() {
+        $('select').material_select();
+    });
+</script>
+<!-- partial -->
+  <script  src="./script.js"></script>
+
+</body>
+</html>
