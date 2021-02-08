@@ -3,7 +3,7 @@ angular.module('app', [])
         var controller = this;
 
         controller.items = [
-            {qty: 2, description: "Large Mocha Latte", price: 4.25},
+            {qty: 1, description: "Large Mocha Latte", price: 4.25},
             {qty: 1, description: "Banana Nut Muffin", price: 2.15},
         ];
 
@@ -33,10 +33,10 @@ angular.module('app', [])
         var payload = {items: []};
 
         angular.forEach(controller.items, function (i) {
-            payload.items.push({amount: i['price'] * 1000, description: i['description'], quantity: i['qty']});
+            payload.items.push({amount: i['price'] * 100, description: i['description'], quantity: i['qty']});
         });
 
-        payload.items.push({amount: controller.tax * 1000, description: "taxes", quantity: 1});
+        payload.items.push({amount: controller.tax * 100, description: "taxes", quantity: 1});
 
         controller.number1 = "", controller.number2 = "", controller.number3 = "", controller.number4 = "";
         controller.holderName = "";
@@ -124,7 +124,10 @@ angular.module('app', [])
              ]
          };
 
-         $http.post("http://localhost:8000/pay", debugParams).then(function (resp){
+         console.log(payload);
+         console.log(debugParams);
+
+         $http.post("http://localhost:8000/pay", payload).then(function (resp){
              console.log(resp);
              debugger;
          }).catch(function (error){
