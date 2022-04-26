@@ -1,3 +1,5 @@
 import server from "./server";
-
-server.listen(8000);
+const port = process.env.PORT || 8000
+server.listen(port, () => {
+    console.log("Server is started on port " + port )
+});

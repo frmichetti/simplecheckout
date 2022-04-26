@@ -5,9 +5,9 @@
   "main": "index.js",
   "scripts": {
     "test": "jest",
-    "dev": "nodemon --watch 'src/' --exec 'ts-node src/app.ts' -e ts",
+    "start:dev": "nodemon src/app.ts",
     "start": "node dist/app.js",
-    "build": "babel src --out-dir dist --extensions '.ts,.tsx' --no-copy-ignored"
+    "build": "tsc --AllowJs"
   },
   "keywords": [],
   "author": "",

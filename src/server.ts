@@ -20,7 +20,7 @@ server.post("/pay", async (request, response) => {
     let axiosResponse = {data: {}};
     try {
         axiosResponse = await payments.creditCard(params);
-    } catch (e) {
+    } catch (e: any) {
         console.log(e);
         axiosResponse.data = e.message
     }
