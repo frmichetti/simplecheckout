@@ -7,11 +7,22 @@ import payments from './pagarme/payments'
 import { creditCardPayment } from "./pagarme/types";
 import cors from 'cors'
 
+const serveStatic = require('serve-static')
+const path = require('path')
+
 const server = express();
 
 server.use(cors())
 server.use(bodyParser.json());
-server.use('/public', express.static('public'));
+
+
+//here we are configuring dist to serve app files
+server.use('/', serveStatic(path.join(__dirname, '/../public')))
+
+// this * route is to serve project on different page routes except root `/`
+server.get(/.*/, function (req, res) {
+    res.sendFile(path.join(__dirname, '/../public/index.html'))
+})
 
 server.get("/", (request, response) => {
     return response.send("Hello!");
