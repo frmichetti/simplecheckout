@@ -5,9 +5,11 @@ import bodyParser from "body-parser";
 // import payments from "./mundipagg/payments";
 import payments from './pagarme/payments'
 import { creditCardPayment } from "./pagarme/types";
+import cors from 'cors'
 
 const server = express();
 
+server.use(cors())
 server.use(bodyParser.json());
 server.use('/public', express.static('public'));
 
@@ -40,14 +42,17 @@ server.post('/pay', async (req: Request, res: Response) => {
     console.log(payload)
 
     let axiosResponse = {data: {}}
+    let code = 0;
 
     try {
         axiosResponse = await payments.creditCard(payload)
+        code = 200
     } catch (error: any) {
         console.error(error)
         axiosResponse.data = error.message
+        code = 400
     }
-    res.json(axiosResponse.data)
+    res.status(code).json(axiosResponse.data)
 })
 
 export default server;
