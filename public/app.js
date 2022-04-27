@@ -129,10 +129,10 @@ angular.module('app', [])
 
          $http.post("http://localhost:8000/pay", payload).then(function (resp){
              console.log(resp);
-             debugger;
+             // debugger;
          }).catch(function (error){
              console.log(error);
-             debugger;
+             // debugger;
          });
      }
 

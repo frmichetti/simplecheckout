@@ -1,11 +1,19 @@
 import axios from 'axios';
 
-const creditCard = (params: { items: { amount: number; description: string; quantity: number; }[];
-        customer: { name: string; email: string; };
-        payments: { payment_method: string;
-        credit_card: { recurrence: boolean; installments: number; statement_descriptor: string;
-        card: { number: string; holder_name: string; exp_month: number; exp_year: number; cvv: string;
-        billing_address: { line_1: string; zip_code: string; city: string; state: string; country: string; }; }; }; }[]; }) => {
+const creditCard = (params: {
+    items: { amount: number; description: string; quantity: number; }[];
+    customer: { name: string; email: string; };
+    payments: {
+        payment_method: string;
+        credit_card: {
+            recurrence: boolean; installments: number; statement_descriptor: string;
+            card: {
+                number: string; holder_name: string; exp_month: number; exp_year: number; cvv: string;
+                billing_address: { line_1: string; zip_code: string; city: string; state: string; country: string; };
+            };
+        };
+    }[];
+}) => {
     // Set config defaults when creating the instance
     const instance = axios.create({
         baseURL: 'https://api.mundipagg.com/core/v1'
@@ -20,4 +28,4 @@ const creditCard = (params: { items: { amount: number; description: string; quan
     return instance.post('/orders', params);
 
 }
-export default {creditCard};
+export default { creditCard };
